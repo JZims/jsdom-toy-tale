@@ -46,7 +46,7 @@ function turnURLtoHTML(toyData){
   const toyImage = document.createElement("img")
         toyImage.classList.add("toy-avatar")
         toyItemDiv.append(toyImage)
-        toyImage.innerText= `src="${toyData.image}"`
+        toyImage.setAttribute("src", toyData.image)
 
   const toyLikes = document.createElement("p")
         toyLikes.classList.add("likes")
