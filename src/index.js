@@ -27,10 +27,14 @@ fetch('http://localhost:3000/toys')
 
   .then(res => res.json())
   .then(function(data){
-    for (var i in data){
-      turnURLtoHTML(data[i])
+
+    data.forEach(function(data){
+      turnURLtoHTML(data)
+    })
+    /*for (var i in data){
+      turnURLtoHTML(data[i])*/
     }
-  }
+  
   )
     
 
@@ -46,7 +50,7 @@ function turnURLtoHTML(toyData){
   const toyImage = document.createElement("img")
         toyImage.classList.add("toy-avatar")
         toyItemDiv.append(toyImage)
-        toyImage.setAttribute("src", toyData.image)
+        toyImage.src= toyData.image
 
   const toyLikes = document.createElement("p")
         toyLikes.classList.add("likes")
@@ -58,8 +62,33 @@ function turnURLtoHTML(toyData){
         toyCardButton.innerText= "Like <3"
         toyItemDiv.append(toyCardButton)
 
-  
 
   toyCollection.append(toyItemDiv)
+
+  toyCardButton.addEventListener("click", (e) => {
+    debugger;
+    console.log(e.target.name)
+    //.value= `${toyData.likes += 1}`
+    
+
+    fetch(`http://localhost:3000/toys/${toyData.id}`, {
+     method: "PATCH", 
+     headers: {
+       "Content-Type": "application/json", 
+       "Accept": "application/json"
+    },
+     body: JSON.stringify({likes: toyData.likes +1 })
+
+    })
+    .then(res => res.json())
+    .then(function(res){
+
+    }
+
+    
+  )
+})
+
     
 }
+
