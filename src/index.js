@@ -26,36 +26,23 @@ const toyLikes = document.createElement("p")
       toyLikes.classList.add("likes")
 const toyCardButton = document.createElement("button")
       toyCardButton.classList.add("like-btn")
-//const toyName = document.querySelector("")
-
-
-fetch('http://localhost:3000/toys', {
-  method: "GET", 
-  headers: {
-      "Content-Type": "application/json", 
-      Accept: "application/json"
-  }, 
-  body: JSON.stringify({
+const toyName = document.createElement("h2")
       
-      id: 0, 
-      name: ,
-      image: toyImage,
-      likes: 0
 
-  })  
-}
+fetch('http://localhost:3000/toys')
 
   .then(res => res.json)
-  .then(json => {
-    turnURLtoHTML(json)
-    console.log("hello")
-    debugger;
-  })
+  .then(function (json){
+    json.forEach (function(json){
+      turnURLtoHTML(json)
+    })
+    })
+
   
-)
+
 
 function turnURLtoHTML(toyData){
-
-  
+    toyName.innerText=`${toyData.name}`
+    toyImage.innerHTML=`src = "${toyData.image}"`
+    
 }
-
